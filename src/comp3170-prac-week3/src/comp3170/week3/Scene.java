@@ -10,6 +10,7 @@ import static org.lwjgl.opengl.GL11.glPolygonMode;
 import static org.lwjgl.opengl.GL15.glBindBuffer;
 
 import org.joml.Matrix4f;
+import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 
@@ -30,6 +31,11 @@ public class Scene {
 	private int colourBuffer;
 
 	private Shader shader;
+	
+	private Matrix4f modelMatrix = new Matrix4f();
+	private Matrix4f transMatrix = new Matrix4f();
+	private Matrix4f rotMatrix = new Matrix4f();
+	private Matrix4f scaMatrix = new Matrix4f();
 
 	public Scene() {
 
@@ -77,7 +83,14 @@ public class Scene {
 			// @formatter:on
 
 		indexBuffer = GLBuffers.createIndexBuffer(indices);
-
+		
+		translationMatrix(0.75f, -0.75f, transMatrix);
+		scaleMatrix(0.25f, 0.25f, scaMatrix);
+		rotationMatrix(1.57079632679f, rotMatrix);
+		
+		modelMatrix.translate(new Vector3f(0.9f, 0.0f, 0.0f)).rotateZ(1.57079632679f).scale(0.2f);
+		
+		//modelMatrix.mul(transMatrix).mul(rotMatrix).mul(scaMatrix);
 	}
 
 	public void draw() {
@@ -85,6 +98,7 @@ public class Scene {
 		shader.enable();
 		// set the attributes
 		shader.setAttribute("a_position", vertexBuffer);
+		shader.setUniform("u_modelMatrix", modelMatrix);
 		shader.setAttribute("a_colour", colourBuffer);
 
 		// draw using index buffer
@@ -135,6 +149,10 @@ public class Scene {
 	public static Matrix4f rotationMatrix(float angle, Matrix4f dest) {
 
 		// TODO: Your code here
+		dest.m00((float) Math.cos(angle));
+		dest.m01((float) Math.sin(angle));
+		dest.m10((float) Math.sin(angle));
+		dest.m11((float) Math.cos(angle));
 
 		return dest;
 	}
@@ -152,7 +170,9 @@ public class Scene {
 	public static Matrix4f scaleMatrix(float sx, float sy, Matrix4f dest) {
 
 		// TODO: Your code here
-
+		dest.m00(sx);
+		dest.m11(sy);
+		
 		return dest;
 	}
 
