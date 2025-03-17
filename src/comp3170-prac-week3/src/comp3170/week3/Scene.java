@@ -87,10 +87,13 @@ public class Scene {
 		translationMatrix(0.75f, -0.75f, transMatrix);
 		scaleMatrix(0.25f, 0.25f, scaMatrix);
 		rotationMatrix(1.57079632679f, rotMatrix);
-		
-		modelMatrix.translate(new Vector3f(0.9f, 0.0f, 0.0f)).rotateZ(1.57079632679f).scale(0.2f);
-		
 		//modelMatrix.mul(transMatrix).mul(rotMatrix).mul(scaMatrix);
+		
+		modelMatrix.translate(new Vector3f(0.9f, 0.0f, 0.0f)).rotateZ(1.57079632679f).scale(0.2f);	
+	}
+	
+	public void update() {
+		System.out.println("Updating");
 	}
 
 	public void draw() {
