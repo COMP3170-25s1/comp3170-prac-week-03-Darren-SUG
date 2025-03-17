@@ -28,7 +28,6 @@ public class Scene {
 	private int indexBuffer;
 	private Vector3f[] colours;
 	private int colourBuffer;
-	private Matrix4f modelMatrix;
 
 	private Shader shader;
 
@@ -78,8 +77,6 @@ public class Scene {
 			// @formatter:on
 
 		indexBuffer = GLBuffers.createIndexBuffer(indices);
-		
-		modelMatrix = new Matrix4f();
 
 	}
 

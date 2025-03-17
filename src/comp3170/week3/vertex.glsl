@@ -5,13 +5,11 @@ in vec3 a_colour; // vertex colour RGB
 
 out vec3 v_colour; // to fragment shader
 
-uniform mat4 u_modelMatrix;
-
 void main() {
 	v_colour = a_colour;
-	vec4 p = u_modelMatrix * a_position;
+
 	// pad the vertex to a homogeneous 3D point
-    gl_Position = vec4(p.xy, 0, 1);
+    gl_Position = a_position;
 
 }
 
