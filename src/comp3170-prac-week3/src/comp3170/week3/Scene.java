@@ -33,9 +33,6 @@ public class Scene {
 	private Shader shader;
 	
 	private Matrix4f modelMatrix = new Matrix4f();
-	private Matrix4f transMatrix = new Matrix4f();
-	private Matrix4f rotMatrix = new Matrix4f();
-	private Matrix4f scaMatrix = new Matrix4f();
 
 	public Scene() {
 
@@ -82,18 +79,12 @@ public class Scene {
 			};
 			// @formatter:on
 
-		indexBuffer = GLBuffers.createIndexBuffer(indices);
-		
-		translationMatrix(0.75f, -0.75f, transMatrix);
-		scaleMatrix(0.25f, 0.25f, scaMatrix);
-		rotationMatrix(1.57079632679f, rotMatrix);
-		//modelMatrix.mul(transMatrix).mul(rotMatrix).mul(scaMatrix);
-		
-		modelMatrix.translate(new Vector3f(0.9f, 0.0f, 0.0f)).rotateZ(1.57079632679f).scale(0.2f);	
+		indexBuffer = GLBuffers.createIndexBuffer(indices);	
+		modelMatrix.translate(new Vector3f(0.5f, 0.0f, 0.0f)).scale(0.5f);
 	}
 	
-	public void update() {
-		System.out.println("Updating");
+	public void update(float deltaTime) {
+		modelMatrix.translate(new Vector3f(0.0f, 1.5f * deltaTime, 0.0f)).rotateZ(1.57079632679f*deltaTime);
 	}
 
 	public void draw() {
@@ -178,5 +169,4 @@ public class Scene {
 		
 		return dest;
 	}
-
 }

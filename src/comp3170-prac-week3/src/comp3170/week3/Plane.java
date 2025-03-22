@@ -1,6 +1,7 @@
 package comp3170.week3;
 
 public class Plane {
+	
 	private Scene scene;
 	
 	public Plane() {
@@ -11,7 +12,7 @@ public class Plane {
 		scene.draw();
 	}
 	
-	public void update() {
-		scene.update();
+	public void update(float deltaTime) {
+		scene.update(deltaTime);
 	}
 }
